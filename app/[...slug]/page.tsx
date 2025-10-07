@@ -2,20 +2,54 @@ import remarkGfm from "remark-gfm";
 import ReactMarkdown from "react-markdown";
 import fs from "fs";
 import path from "path";
+import matter from "gray-matter";
 export const dynamic = "force-static";
 import { Metadata } from "next";
 import { notFound } from "next/navigation";
 
-type PostPageProps = { params: Promise<{ slug: string }> };
+type Params = {
+  slug: string[];
+};
 
-export default async function PostPage({ params }: PostPageProps) {
-  const { slug } = await params;
+type DocData = {
+  data: Record<string, any>;
+  content: string;
+};
+
+function getDocs(params: Params): DocData {
+  const slugPath = params.slug.join("/");
   const postsDirectory = path.join(process.cwd(), "api_docs");
-  const filePath = path.join(postsDirectory, slug + ".md");
+  const filePath = path.join(postsDirectory, `${slugPath}.md`);
+
   if (!fs.existsSync(filePath)) {
     notFound();
   }
-  const markdownString = fs.readFileSync(filePath, "utf-8");
+
+  const fileContents = fs.readFileSync(filePath, "utf-8");
+  const { data, content } = matter(fileContents);
+
+  return { data, content };
+}
+
+interface PostPageProps {
+  params: Params;
+}
+
+type GenerateMetadataProps = {
+  params: { slug: string[] };
+};
+
+export function generateMetadata({ params }: GenerateMetadataProps): Metadata {
+  const { data } = getDocs({ slug: params.slug });
+
+  return {
+    title: data.title ?? "タイトルが取得できませんでした",
+    description: data.description ?? "説明が取得できませんでした",
+  };
+}
+
+export default function PostPage({ params }: PostPageProps) {
+  const { content } = getDocs(params);
   return (
     <div className="prose-lg prose-slate w-full max-w-4xl p-6 lg:prose-xl">
       <ReactMarkdown
@@ -66,7 +100,7 @@ export default async function PostPage({ params }: PostPageProps) {
             ),
         }}
       >
-        {markdownString}
+        {content}
       </ReactMarkdown>
     </div>
   );

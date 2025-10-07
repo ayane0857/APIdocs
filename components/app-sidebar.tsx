@@ -1,5 +1,4 @@
 "use client";
-import { ChevronRightIcon } from "lucide-react";
 
 import {
   Sidebar,
@@ -15,17 +14,13 @@ import {
   SidebarMenuSubButton,
   SidebarMenuSubItem,
 } from "@/components/ui/sidebar";
+
 import {
   DropdownMenu,
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import {
-  Collapsible,
-  CollapsibleContent,
-  CollapsibleTrigger,
-} from "@/components/ui/collapsible";
 
 import * as React from "react";
 import { ChevronsUpDown, GalleryVerticalEnd } from "lucide-react";
@@ -34,127 +29,26 @@ import { useState } from "react";
 
 const items = [
   {
-    title: "Getting Started",
-    url: "#",
+    title: "Home",
+    url: "/",
     items: [
       {
-        title: "Installation",
-        url: "#",
-      },
-      {
-        title: "Project Structure",
-        url: "#",
-      },
-    ],
-  },
-  {
-    title: "Building Your Application",
-    url: "#",
-    items: [
-      {
-        title: "Routing",
-        url: "#",
-      },
-      {
-        title: "Data Fetching",
-        url: "#",
-        isActive: true,
-      },
-      {
-        title: "Rendering",
-        url: "#",
-      },
-      {
-        title: "Caching",
-        url: "#",
-      },
-      {
-        title: "Styling",
-        url: "#",
-      },
-      {
-        title: "Optimizing",
-        url: "#",
-      },
-      {
-        title: "Configuring",
-        url: "#",
-      },
-      {
-        title: "Testing",
-        url: "#",
-      },
-      {
-        title: "Authentication",
-        url: "#",
-      },
-      {
-        title: "Deploying",
-        url: "#",
-      },
-      {
-        title: "Upgrading",
-        url: "#",
-      },
-      {
-        title: "Examples",
-        url: "#",
+        title: "How to use",
+        url: "/how-to-use",
       },
     ],
   },
   {
     title: "API Reference",
-    url: "#",
+    url: "/api-reference",
     items: [
       {
-        title: "Components",
-        url: "#",
+        title: "Payment",
+        url: "/api-reference/payment",
       },
       {
-        title: "File Conventions",
-        url: "#",
-      },
-      {
-        title: "Functions",
-        url: "#",
-      },
-      {
-        title: "next.config.js Options",
-        url: "#",
-      },
-      {
-        title: "CLI",
-        url: "#",
-      },
-      {
-        title: "Edge Runtime",
-        url: "#",
-      },
-    ],
-  },
-  {
-    title: "Architecture",
-    url: "#",
-    items: [
-      {
-        title: "Accessibility",
-        url: "#",
-      },
-      {
-        title: "Fast Refresh",
-        url: "#",
-      },
-      {
-        title: "Next.js Compiler",
-        url: "#",
-      },
-      {
-        title: "Supported Browsers",
-        url: "#",
-      },
-      {
-        title: "Turbopack",
-        url: "#",
+        title: "Balance",
+        url: "/api-reference/balance",
       },
     ],
   },
@@ -205,33 +99,24 @@ export function AppSidebar() {
           <SidebarGroupContent>
             <SidebarMenu>
               {items.map((item, index) => (
-                <Collapsible
-                  key={index}
-                  className="group/collapsible"
-                  defaultOpen={true}
-                >
-                  <SidebarMenuItem>
-                    <CollapsibleTrigger asChild>
-                      <SidebarMenuButton>
-                        <span>{item.title}</span>
-                        <ChevronRightIcon className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
-                      </SidebarMenuButton>
-                    </CollapsibleTrigger>
-                    <CollapsibleContent>
-                      <SidebarMenuSub>
-                        {item.items.map((subItem, subIndex) => (
-                          <SidebarMenuSubItem key={subIndex}>
-                            <SidebarMenuSubButton asChild>
-                              <a href={subItem.url}>
-                                <span>{subItem.title}</span>
-                              </a>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                        ))}
-                      </SidebarMenuSub>
-                    </CollapsibleContent>
-                  </SidebarMenuItem>
-                </Collapsible>
+                <SidebarMenuItem key={index}>
+                  <SidebarMenuButton asChild>
+                    <a href={item.url}>
+                      <span>{item.title}</span>
+                    </a>
+                  </SidebarMenuButton>
+                  <SidebarMenuSub>
+                    {item.items.map((subItem, subIndex) => (
+                      <SidebarMenuSubItem key={subIndex}>
+                        <SidebarMenuSubButton asChild>
+                          <a href={subItem.url}>
+                            <span>{subItem.title}</span>
+                          </a>
+                        </SidebarMenuSubButton>
+                      </SidebarMenuSubItem>
+                    ))}
+                  </SidebarMenuSub>
+                </SidebarMenuItem>
               ))}
             </SidebarMenu>
           </SidebarGroupContent>
