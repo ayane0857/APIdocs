@@ -1,5 +1,6 @@
 import remarkGfm from "remark-gfm";
 import ReactMarkdown, { Components } from "react-markdown";
+import type { HTMLAttributes, ReactNode } from "react";
 import fs from "fs";
 import path from "path";
 import matter from "gray-matter";
@@ -107,7 +108,13 @@ export default async function PostPage({ params }: PostPageProps) {
     td: ({ ...props }) => (
       <td className="px-4 py-2 border border-gray-300" {...props} />
     ),
-    code: ({ inline, ...props }) =>
+    code: ({
+      inline,
+      ...props
+    }: {
+      inline?: boolean;
+      children?: ReactNode;
+    } & HTMLAttributes<HTMLElement>) =>
       inline ? (
         <code className="bg-gray-100 text-sm px-1 py-0.5 rounded" {...props} />
       ) : (
