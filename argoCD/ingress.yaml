@@ -8,13 +8,13 @@ metadata:
 spec:
   ingressClassName: traefik
   rules:
-    - host: ayane0857.net
+    - host: api.ayane0857.net/docs/
       http:
         paths:
           - pathType: Prefix
             path: "/"
             backend:
               service:
-                name: ayane-official-site
+                name: ayane-api-document-site
                 port:
                   number: 80
