@@ -25,14 +25,14 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en">
+    <html lang="ja">
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SidebarProvider>
           <AppSidebar />
           <SidebarTrigger />
-          {children}
+            {children}
         </SidebarProvider>
       </body>
     </html>

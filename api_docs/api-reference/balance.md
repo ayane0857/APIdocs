@@ -1,111 +1,46 @@
 ---
-title: "公式サイト(仮)をリリースしました！"
-description: "まだ制作途中ですが、公式サイトをリリースしました。"
+title: "API-Reference / Balance"
+description: "BalanceのAPIリファレンスです"
 ---
 
-# GFM
+# balance とは
 
-Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni, nemo!
+残高記録についての API です。
 
-## Autolink literals
+## GET /balance
 
-www.example.com, https://example.com, and contact@example.com.
+現在の残高状況を表示します
 
-## Footnote
+### レスポンス
 
-A note[^1]
+```json
+{
+  "balance": 0,
+  "total_money": 0,
+  "created_at": "0001-01-01T00:00:00Z",
+  "updated_at": "2025-08-27T14:59:19.353133Z"
+}
+```
 
-[^1]: Big note.
+## PUT /balance
 
-## Strikethrough
+現在の残高状況を更新します。
 
-~one~ or ~~two~~ tildes.
+※使用には X-API-TOKEN が必要です。
 
-## Table
+### クエリパラメータ
 
-| a   | b   |   c |  d  |
-| --- | :-- | --: | :-: |
+| パラメータ名 | 型     | 必須 | 説明 |
+| :----------- | :----- | :--- | :--- |
+| Balance      | string | 任意 | 残高 |
 
-## Tasklist
+### レスポンス
 
-- [ ] to do
-- [x] done
-
-## test
-
-```tsx
-export function AppSidebar() {
-  const [selectedapist, setSelectedapist] = useState(apists[0].label);
-  return (
-    <Sidebar>
-      <SidebarHeader>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            >
-              <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                <GalleryVerticalEnd className="size-4" />
-              </div>
-              <div className="flex flex-col gap-0.5 leading-none">
-                <span className="font-medium">Documentation</span>
-                <span className="">{selectedapist}</span>
-              </div>
-              <ChevronsUpDown className="ml-auto" />
-            </SidebarMenuButton>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            {apists.map((apist, index) => (
-              <DropdownMenuItem
-                key={index}
-                onClick={() => setSelectedapist(apist.label)}
-              >
-                {apist.label}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </SidebarHeader>
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>API Document</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item, index) => (
-                <Collapsible
-                  key={index}
-                  className="group/collapsible"
-                  defaultOpen={index === 0}
-                >
-                  <SidebarMenuItem>
-                    <CollapsibleTrigger asChild>
-                      <SidebarMenuButton>
-                        <span>{item.title}</span>
-                        <ChevronRightIcon className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
-                      </SidebarMenuButton>
-                    </CollapsibleTrigger>
-                    <CollapsibleContent>
-                      <SidebarMenuSub>
-                        {item.items.map((subItem, subIndex) => (
-                          <SidebarMenuSubItem key={subIndex}>
-                            <SidebarMenuSubButton asChild>
-                              <a href={subItem.url}>
-                                <span>{subItem.title}</span>
-                              </a>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                        ))}
-                      </SidebarMenuSub>
-                    </CollapsibleContent>
-                  </SidebarMenuItem>
-                </Collapsible>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
-    </Sidebar>
-  );
+```json
+{
+  "balance": 0,
+  "total_money": 0,
+  "created_at": "0001-01-01T00:00:00Z",
+  "updated_at": "2025-08-27T14:59:19.353133Z"
 }
 ```

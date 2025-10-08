@@ -1,0 +1,32 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ayane-official-site
+spec:
+  revisionHistoryLimit: 3
+  selector:
+    matchLabels:
+      app: ayane-official-site
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: ayane-official-site
+    spec:
+      imagePullSecrets:
+        - name: internal-harbor
+      containers:
+        - name: app
+          image: registry.uniproject.jp/ayane/ayane-api-document-site:latest
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 3000
+              name: default-port
+          resources:
+            limits:
+              memory: "3Gi"
+              cpu: "3000m"
+            requests:
+              memory: "1Gi"
+              cpu: "1000m"

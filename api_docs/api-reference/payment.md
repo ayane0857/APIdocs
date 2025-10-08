@@ -1,106 +1,120 @@
-# GFM
+---
+title: "API-Reference / Payment"
+description: "PaymentのAPIリファレンスです"
+---
 
-Lorem ipsum dolor sit amet consectetur, adipisicing elit. Magni, nemo!
+## GET /payment
 
-## Autolink literals
+これまでの支払い履歴を閲覧できます
 
-www.example.com, https://example.com, and contact@example.com.
+### クエリパラメータ
 
-## Footnote
+| パラメータ名 | 型      | 必須 | 説明                                        |
+| :----------- | :------ | :--- | :------------------------------------------ |
+| limit        | integer | 任意 | 取得する支払い履歴の一覧。デフォルトは 10。 |
+| offset       | integer | 任意 | オフセット。                                |
 
-A note[^1]
+### レスポンス
 
-[^1]: Big note.
+```json
+[
+  {
+    "ID": 1,
+    "Money": 110,
+    "Payment": "PayPay",
+    "CreatedAt": "2025-07-22T02:59:28.53506Z",
+    "UpdatedAt": "2025-07-22T02:59:28.53506Z"
+  },
+  {
+    "ID": 2,
+    "Money": 220,
+    "Payment": "PayPay",
+    "CreatedAt": "2025-07-22T05:41:13.160653Z",
+    "UpdatedAt": "2025-07-22T05:41:13.160653Z"
+  }
+]
+```
 
-## Strikethrough
+## GET /payment/:id
 
-~one~ or ~~two~~ tildes.
+特定の支払い履歴を閲覧できます
 
-## Table
+### レスポンス
 
-| a   | b   |   c |  d  |
-| --- | :-- | --: | :-: |
+```json
+{
+  "ID": 1,
+  "Money": 110,
+  "Payment": "PayPay",
+  "CreatedAt": "2025-07-22T02:59:28.53506Z",
+  "UpdatedAt": "2025-07-22T02:59:28.53506Z"
+}
+```
 
-## Tasklist
+## POST /payment
 
-- [ ] to do
-- [x] done
+支払い履歴を追加します
 
-## test
+※使用には X-API-TOKEN が必要です。
 
-```tsx
-export function AppSidebar() {
-  const [selectedapist, setSelectedapist] = useState(apists[0].label);
-  return (
-    <Sidebar>
-      <SidebarHeader>
-        <DropdownMenu>
-          <DropdownMenuTrigger asChild>
-            <SidebarMenuButton
-              size="lg"
-              className="data-[state=open]:bg-sidebar-accent data-[state=open]:text-sidebar-accent-foreground"
-            >
-              <div className="bg-sidebar-primary text-sidebar-primary-foreground flex aspect-square size-8 items-center justify-center rounded-lg">
-                <GalleryVerticalEnd className="size-4" />
-              </div>
-              <div className="flex flex-col gap-0.5 leading-none">
-                <span className="font-medium">Documentation</span>
-                <span className="">{selectedapist}</span>
-              </div>
-              <ChevronsUpDown className="ml-auto" />
-            </SidebarMenuButton>
-          </DropdownMenuTrigger>
-          <DropdownMenuContent>
-            {apists.map((apist, index) => (
-              <DropdownMenuItem
-                key={index}
-                onClick={() => setSelectedapist(apist.label)}
-              >
-                {apist.label}
-              </DropdownMenuItem>
-            ))}
-          </DropdownMenuContent>
-        </DropdownMenu>
-      </SidebarHeader>
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>API Document</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item, index) => (
-                <Collapsible
-                  key={index}
-                  className="group/collapsible"
-                  defaultOpen={index === 0}
-                >
-                  <SidebarMenuItem>
-                    <CollapsibleTrigger asChild>
-                      <SidebarMenuButton>
-                        <span>{item.title}</span>
-                        <ChevronRightIcon className="ml-auto transition-transform group-data-[state=open]/collapsible:rotate-90" />
-                      </SidebarMenuButton>
-                    </CollapsibleTrigger>
-                    <CollapsibleContent>
-                      <SidebarMenuSub>
-                        {item.items.map((subItem, subIndex) => (
-                          <SidebarMenuSubItem key={subIndex}>
-                            <SidebarMenuSubButton asChild>
-                              <a href={subItem.url}>
-                                <span>{subItem.title}</span>
-                              </a>
-                            </SidebarMenuSubButton>
-                          </SidebarMenuSubItem>
-                        ))}
-                      </SidebarMenuSub>
-                    </CollapsibleContent>
-                  </SidebarMenuItem>
-                </Collapsible>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
-      </SidebarContent>
-    </Sidebar>
-  );
+### クエリパラメータ
+
+| パラメータ名 | 型     | 必須 | 説明       |
+| :----------- | :----- | :--- | :--------- |
+| Money        | string | 必須 | 支払額     |
+| Payment      | string | 必須 | 支払い方法 |
+
+### レスポンス
+
+```json
+{
+  "ID": 2,
+  "Money": 220,
+  "Payment": "PayPay",
+  "CreatedAt": "2025-07-22T05:41:13.160653Z",
+  "UpdatedAt": "2025-07-22T05:41:13.160653Z"
+}
+```
+
+## PUT /payment/:id
+
+支払い履歴を編集します
+
+※使用には X-API-TOKEN が必要です。
+
+### クエリパラメータ
+
+| パラメータ名 | 型     | 必須 | 説明       |
+| :----------- | :----- | :--- | :--------- |
+| Money        | string | 任意 | 支払額     |
+| Payment      | string | 任意 | 支払い方法 |
+
+### レスポンス
+
+```json
+{
+  "ID": 1,
+  "Money": 220,
+  "Payment": "PayPay",
+  "CreatedAt": "2025-07-22T02:59:28.53506Z",
+  "UpdatedAt": "2025-07-22T05:46:21.484355757Z"
+}
+```
+
+## DELETE /payment/:id
+
+支払い履歴を削除します
+
+※使用には X-API-TOKEN が必要です。
+
+### レスポンス
+
+```json
+{
+  "ID": 1,
+  "Money": 220,
+  "Payment": "PayPay",
+  "CreatedAt": "2025-07-22T02:59:28.53506Z",
+  "UpdatedAt": "2025-07-22T05:46:21.484355Z"
 }
 ```
