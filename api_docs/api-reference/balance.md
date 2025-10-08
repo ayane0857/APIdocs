@@ -26,7 +26,7 @@ description: "BalanceのAPIリファレンスです"
 
 現在の残高状況を更新します。
 
-※使用には X-API-TOKEN が必要です。
+リクエストには X-API-TOKEN が必要です。
 
 ### クエリパラメータ
 

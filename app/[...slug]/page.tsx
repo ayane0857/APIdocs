@@ -75,7 +75,6 @@ export default async function PostPage({ params }: PostPageProps) {
     a: ({ ...props }) => (
       <a
         className="text-blue-600 hover:underline"
-        target="_blank"
         rel="noopener noreferrer"
         {...props}
       />

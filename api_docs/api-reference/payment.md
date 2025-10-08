@@ -55,7 +55,7 @@ description: "PaymentのAPIリファレンスです"
 
 支払い履歴を追加します
 
-※使用には X-API-TOKEN が必要です。
+リクエストには X-API-TOKEN が必要です。
 
 ### クエリパラメータ
 
@@ -80,7 +80,7 @@ description: "PaymentのAPIリファレンスです"
 
 支払い履歴を編集します
 
-※使用には X-API-TOKEN が必要です。
+リクエストには X-API-TOKEN が必要です。
 
 ### クエリパラメータ
 
@@ -105,7 +105,7 @@ description: "PaymentのAPIリファレンスです"
 
 支払い履歴を削除します
 
-※使用には X-API-TOKEN が必要です。
+リクエストには X-API-TOKEN が必要です。
 
 ### レスポンス
 
